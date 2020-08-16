@@ -13,6 +13,5 @@ class Shippart{
     {
         this.destroyed = true;
     }
-
-    
+ 
 }

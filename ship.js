@@ -7,13 +7,13 @@ class Ship {
         this.y = y;
         this.direction = direction;
 
-        this.body = [];
+        this.shipParts = [];
         this.createBody();
     }
 
     createBody() {
         for (var i = 0; i < this.size; i++) {
-            this.body.push(new Shippart(this, i, 0));
+            this.shipParts.push(new Shippart(this, 0, i));
         }
     }
 
@@ -21,25 +21,16 @@ class Ship {
         if (this.direction == 0) {
             this.direction = 1;
             for (var i = 0; i < this.size; i++) {
-                this.body[i].relX = i;
-                this.body[i].relY = 0;
+                this.shipParts[i].relX = i;
+                this.shipParts[i].relY = 0;
             }
         }
         else {
             this.direction = 0;
             for (var i = 0; i < this.size; i++) {
-                this.body[i].relX = 0;
-                this.body[i].relY = i;
+                this.shipParts[i].relX = 0;
+                this.shipParts[i].relY = i;
             }
-        }
-    }
-
-    draw() {
-        fill(23);
-        if (this.direction == 0) {
-            ellipse(this.x * 50, this.y * 50, 30, 45 * this.size);
-        } else {
-            ellipse(this.x * 50, this.y * 50, 30, 45 * this.size);
         }
     }
 }

@@ -20,22 +20,19 @@ class Board {
         for (var element of this.boardcells.values()) {
             element.draw();
         }
-        for (var ship of this.ships) {
-            ship.draw();
-        }
     }
 
     placeShip(ship, x, y) {
         for (var i = 0; i < ship.size; i++) {
-            if (this.boardcells.get((ship.body[i].relX + x) + "," + (ship.body[i].relY + y)).occupied) {
+            if (this.boardcells.get((ship.shipParts[i].relX + x) + "," + (ship.shipParts[i].relY + y)).occupied) {
                 return false;
             }
         }
 
         this.ships.push(ship);
         for (var i = 0; i < ship.size; i++) {
-            this.boardcells.get((ship.body[i].relX + x) + "," + (ship.body[i].relY + y)).occupied = true;
-            this.boardcells.get((ship.body[i].relX + x) + "," + (ship.body[i].relY + y)).shippart = ship.body[i];
+            this.boardcells.get((ship.shipParts[i].relX + x) + "," + (ship.shipParts[i].relY + y)).occupied = true;
+            this.boardcells.get((ship.shipParts[i].relX + x) + "," + (ship.shipParts[i].relY + y)).shippart = ship.shipParts[i];
         }
     }
 }

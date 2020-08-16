@@ -23,6 +23,9 @@ class Boardcell {
         else
             this.brightness = (255);
 
+        if(this.occupied)
+            this.brightness = (65);
+        
         fill(this.brightness);
         stroke(0);
         rect(this.x, this.y, this.w, this.h);
@@ -31,6 +34,8 @@ class Boardcell {
         fill(0);
         text(this.x + "," + this.y , this.x+2, this.y+11);
         text(this.brightness , this.x+2, this.y+47);
+        
+
         
     }
 
