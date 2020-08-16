@@ -1,19 +1,25 @@
 class Ship {
 
-    constructor(name, x, y, direction, size) {
+    constructor(name, size) {
         this.name = name;
         this.size = size;
-        this.x = x;
-        this.y = y;
+        this.x = 0;
+        this.y = 0;
         this.direction = direction;
 
         this.shipParts = [];
         this.createBody();
     }
 
+    setPos(x, y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+
     createBody() {
         for (var i = 0; i < this.size; i++) {
-            this.shipParts.push(new Shippart(this, 0, i));
+            this.shipParts.push(new Shippart(this, i, 0));
         }
     }
 
