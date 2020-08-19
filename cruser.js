@@ -1,9 +1,8 @@
 class Cruiser extends Ship {
 
     constructor() {
-        super("cruiser", 0, 3);
+        super("Cruiser", 3);
     }
 
     //
-    
 }

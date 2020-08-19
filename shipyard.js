@@ -1,5 +1,4 @@
 class Shipyard{
-
     constructor()
     {
         this.carrier = new Carrier();
@@ -14,4 +13,3 @@ class Shipyard{
         
     }
 }
-

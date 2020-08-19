@@ -1,8 +1,11 @@
-
 function setup() {
-  createCanvas(displayWidth, displayHeight);
+  createCanvas(displayWidth - 50, displayHeight - 200);
   board = new Board(50, 100, 100);
   board.buildBoard();
+
+  board.selectedShip = new Cruiser();
+
+  board.placeShip(board.selectedShip, 3, 3);
 }
 
 function draw() {
@@ -15,7 +18,19 @@ function draw() {
   text("fCount: " + frameCount + ", fRate: " + frameRate(), 15, 75);
 }
 
-function mouseWheel(event) {
-  return event.delta;
+function mouseClicked(event) {
+  if (board.selectedShip != null) {
+
+    var cell = board.boardcells.get(Math.floor((mouseX - board.boardXOffset) / board.cellSize) + "," + Math.floor((mouseY - board.boardYOffset) / board.cellSize));
+    if (cell != null) {
+      board.selectedShip.setPos(cell.centerX, cell.centerY);
+    }
+
+  }
 }
 
+function mouseWheel(event) {
+  if (board.selectedShip != null) {
+    board.selectedShip.rotate();
+  }
+}

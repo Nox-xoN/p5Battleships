@@ -5,6 +5,7 @@ class Board {
         this.boardYOffset = boardYOffset;
         this.boardcells = new Map();
 
+        this.selectedShip;
         this.ships = [];
     }
 
@@ -19,6 +20,10 @@ class Board {
     draw() {
         for (var element of this.boardcells.values()) {
             element.draw();
+        }
+
+        for (var i = 0; i < this.ships.length; i++){
+           this.ships[i].draw();
         }
     }
 
@@ -36,3 +41,5 @@ class Board {
         }
     }
 }
+
+
