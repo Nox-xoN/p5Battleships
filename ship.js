@@ -12,9 +12,7 @@ class Ship {
         this.rotation = 0;
 
         this.shipParts = [];
-        this.body;
         this.createBody();
-
     }
 
     setPos(x, y) {
@@ -23,24 +21,33 @@ class Ship {
     }
 
     draw() {
+        for (var i = 0; i < this.size; i++) {
+            this.shipParts[i].draw();
+        }
+
         push();
         translate(this.x, this.y);
+        print(this.x);
         ellipseMode(CORNER);
         angleMode(DEGREES);
         rotate(this.rotation);
+        fill(255,0,0);
         ellipse(-15, -15, 30, 45 * this.size);
         pop();
+
+        
     }
 
     createBody() {
         for (var i = 0; i < this.size; i++) {
             this.shipParts.push(new Shippart(this, 0, i));
+            print(i);
         }
     }
 
     rotate() {
         if (this.rotation == 0) {
-            this.rotation = 90;
+            this.rotation = -90;
             for (var i = 0; i < this.size; i++) {
                 this.shipParts[i].relX = i;
                 this.shipParts[i].relY = 0;
