@@ -47,4 +47,28 @@ class Board {
         var cY = Math.floor((y - this.y) / this.cellSize);
         return new Pos(cX, cY);
     }
+
+    addShip(ship, pos)
+    {
+        this.ships.push(ship);
+        
+        this.tryPlaceShip(ship);
+    }
+
+    removeShip(ship)
+    {
+        this.ships.pop(ship);
+    }
+
+    moveShip(ship)
+    {
+
+    }
+
+    tryPlaceShip(ship)
+    {
+        // ship.shipparts.forEach(shippart => {
+        //     shippart.
+        // });
+    }
 }

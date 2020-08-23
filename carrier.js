@@ -1,7 +1,7 @@
 class Carrier extends Ship {
 
-    constructor() {
-        super("Aircraft Carrier", 5);
+    constructor(pos) {
+        super("Aircraft Carrier", 5, pos);
     }
 
     //

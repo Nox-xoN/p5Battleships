@@ -4,25 +4,33 @@ let direction = 0;
 let increment = 0;
 
 class Ship {
-    constructor(name, size) {
+    constructor(name, size, pos) {
         this.name = name;
         this.size = size;
-        this.x;
-        this.y;
+        this.pos = pos;
         this.rotation = 0;
 
         this.shipParts = [];
-        this.createBody();
+        this.createBodyparts();
     }
 
     move(x, y) {
         this.x = x;
         this.y = y;
+
+        // this.shipParts.forEach(shipPart => {
+        //     shipPart
+        // });
     }
 
     draw() {
         for (var i = 0; i < this.size; i++) {
-            this.shipParts[i].draw();
+            try {
+                this.shipParts[i].draw();
+            } catch (error) {
+                
+            }
+            
         }
 
         push();
@@ -35,26 +43,29 @@ class Ship {
         pop();
     }
 
-    createBody() {
+    createBodyparts() {
         for (var i = 0; i < this.size; i++) {
-            this.shipParts.push(new Shippart(this, 0, i));
+            try {
+                this.shipParts.push(new Shippart(this, new Pos(this.pos.x, this.pos.y + i)));
+            } catch (error) {
+                print("error at createBodyParts");
+            }
+            
         }
     }
-
-    
 
     rotate() {
         if (this.rotation == 0) {
             this.rotation = -90;
             for (var i = 0; i < this.size; i++) {
-                this.shipParts[i].relX = i;
-                this.shipParts[i].relY = 0;
+                this.shipParts[i].pos.x = this.pos.x + i;
+                this.shipParts[i].pos.y = pos.y;
             }
         } else {
             this.rotation = 0;
             for (var i = 0; i < this.size; i++) {
-                this.shipParts[i].relX = 0;
-                this.shipParts[i].relY = i;
+                this.shipParts[i].pos.x = pos.x;
+                this.shipParts[i].pos.y = this.pos.x + i;
             }
         }
     }

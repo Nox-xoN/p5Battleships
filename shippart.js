@@ -1,9 +1,8 @@
 class Shippart {
-    constructor(ship, relX, relY) {
+    constructor(ship, pos) {
         this.destroyed = false;
         this.ship = ship;
-        this.relX = relX;
-        this.relY = relY;
+        this.pos = pos;
     }
 
     destroy() {
@@ -12,6 +11,6 @@ class Shippart {
 
     draw() {
         fill(0, 255, 255);
-        rect(this.ship.x + (this.relX * 50),this.ship.y + (this.relY * 50), 50, 50);
+        rect(this.ship.x + (this.relX * 50), this.ship.y + (this.relY * 50), 50, 50);
     }
 }
