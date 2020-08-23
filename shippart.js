@@ -11,7 +11,7 @@ class Shippart {
     }
 
     draw() {
-        fill(0,255,0);
-        rect(-25 + this.ship.x + (this.relX * 50),-25+ this.ship.y + (this.relY * 50),  50, 50);
+        fill(0, 255, 255);
+        rect(this.ship.x + (this.relX * 50),this.ship.y + (this.relY * 50), 50, 50);
     }
 }

@@ -1,36 +1,34 @@
 function setup() {
   createCanvas(displayWidth - 50, displayHeight - 200);
-  board = new Board(50, 100, 100);
-  board.buildBoard();
 
-  board.selectedShip = new Cruiser();
+  battle = new Battle();
+  battle.playBoard.selectedShip = new Cruiser();
 
-  board.placeShip(board.selectedShip, 3, 3);
 }
 
 function draw() {
   background(140);
-  board.draw();
+  battle.playBoard.draw();
 
   fill(51);
-  textSize(35);
-  text("mPos: " + mouseX + "," + mouseY, 15, 35);
-  text("fCount: " + frameCount + ", fRate: " + frameRate(), 15, 75);
+  textSize(20);
+  text("mPos: " + mouseX + "," + mouseY, 15, 20);
+  text("fCount: " + frameCount + ", fRate: " + frameRate(), 15, 40);
 }
 
 function mouseClicked(event) {
-  if (board.selectedShip != null) {
 
-    var cell = board.boardcells.get(Math.floor((mouseX - board.boardXOffset) / board.cellSize) + "," + Math.floor((mouseY - board.boardYOffset) / board.cellSize));
-    if (cell != null) {
-      board.selectedShip.setPos(cell.centerX, cell.centerY);
-    }
-
+  var cell = battle.playBoard.getCellFromCoords(mouseX, mouseY);
+  print (cell);
+  if (cell != null && cell.occupied) {
+    battle.playBoard.selectedShip = cell.shippart.ship;
   }
+
+
 }
 
 function mouseWheel(event) {
-  if (board.selectedShip != null) {
-    board.selectedShip.rotate();
+  if (battle.playBoard.selectedShip != null) {
+    battle.playBoard.selectedShip.rotate();
   }
 }

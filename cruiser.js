@@ -4,5 +4,5 @@ class Cruiser extends Ship {
         super("Cruiser", 3);
     }
 
-    //
+    
 }

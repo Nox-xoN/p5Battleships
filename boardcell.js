@@ -1,18 +1,20 @@
 class Boardcell {
-    constructor(x, y, w, h, brightness = 255) {
+    constructor(x, y, xReal, yReal, w, h, brightness = 255) {
         this.x = x;
         this.y = y;
+        this.xReal = xReal;
+        this.yReal = yReal;
         this.w = w;
         this.h = h;
         this.brightness = brightness;
         this.occupied = false;
         this.shippart;
-        this.centerX = this.x + (this.w / 2);
-        this.centerY = this.y + (this.h / 2);
+        this.centerX = this.xReal + (this.w / 2);
+        this.centerY = this.yReal + (this.h / 2);
     }
 
     mHovers() {
-        if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+        if (mouseX > this.xReal && mouseX < this.xReal + this.w && mouseY > this.yReal && mouseY < this.yReal + this.h) {
             return true;
         } else {
             return false;
@@ -30,11 +32,11 @@ class Boardcell {
 
         fill(this.brightness);
         stroke(0);
-        rect(this.x, this.y, this.w, this.h);
+        rect(this.xReal, this.yReal, this.w, this.h);
 
         textSize(10);
         fill(0);
-        text(this.x + "," + this.y, this.x + 2, this.y + 11);
-        text(this.brightness, this.x + 2, this.y + 47);
+        text(this.xReal + "," + this.yReal, this.xReal + 2, this.yReal + 11);
+        text(this.brightness, this.xReal + 2, this.yReal + 47);
     }
 }
