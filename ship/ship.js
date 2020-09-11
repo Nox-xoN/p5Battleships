@@ -1,8 +1,3 @@
-let newX;
-let newY;
-let direction = 0;
-let increment = 0;
-
 class Ship {
     constructor(name, size, pos) {
         this.name = name;
@@ -46,7 +41,7 @@ class Ship {
     createBodyparts() {
         for (var i = 0; i < this.size; i++) {
             try {
-                this.shipParts.push(new Shippart(this, new Pos(0, i)));
+                this.shipParts.push(new ShipPart(this, new Pos(0, i)));
             } catch (error) {
                 print("error at createBodyParts");
             }

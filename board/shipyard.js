@@ -2,7 +2,7 @@ class Shipyard extends Board {
     constructor(boardXOffset, boardYOffset, cellSize = 50, cellAmount = 10) {
         super(boardXOffset, boardYOffset, cellSize, cellAmount);
 
-        this.build();
+        this.build(this);
         this.loadShips();
     }
 

@@ -14,11 +14,15 @@ class Board {
         this.ships = [];
     }
 
-    build() {
+    build(board) {
+        print(board);
         for (var y = 0; y < this.cellAmount; y++) {
             for (var x = 0; x < this.cellAmount; x++) {
 
-                this.boardcells.set(x + "," + y, new Boardcell(x, y, this.x + (this.cellSize * x), this.y + (this.cellSize * y), this.cellSize, this.cellSize));
+                this.boardcells.set(
+                    x + "," + y,
+                    new Boardcell(x, y, this.x + (this.cellSize * x), this.y + (this.cellSize * y), this.cellSize, this.cellSize, 255, board)
+                );
             }
         }
     }
@@ -58,7 +62,7 @@ class Board {
     removeShip(ship) {
         //unset shipparts from boardcells (old position)
         ship.shipParts.forEach(shipPart => {
-            this.boardcells.get((shipPart.pos.x) + "," + shipPart.pos.y).shipPart = shipPart;
+            this.boardcells.get(shipPart.pos.x + "," + shipPart.pos.y).shipPart = undefined;
         });
 
         this.ships = this.ships.filter(e => e.name !== ship.name);
@@ -66,18 +70,23 @@ class Board {
 
     tryPlaceShip(ship, pos) {
         for (let shipPart of ship.shipParts) {
-
             //check if pos of every shippart is located in the board
             if (!(
-                    pos.x + shipPart.relPos.x <= this.cellAmount &&
-                    pos.y + shipPart.relPos.y <= this.cellAmount &&
+                    pos.x + shipPart.relPos.x < this.cellAmount &&
+                    pos.y + shipPart.relPos.y < this.cellAmount &&
                     pos.x + shipPart.relPos.x >= 0 &&
                     pos.y + shipPart.relPos.y >= 0
                 )) {
                 return false;
             }
-        }
 
+            //check if ship is not colliding with a already placed ship
+            if (this.boardcells.get((pos.x + shipPart.relPos.x) + "," + (pos.y + shipPart.relPos.y)).shipPart != undefined) {
+                print("collision");
+                return false;
+            }
+        }
+        print("afterCol");
         ship.pos = pos;
 
         //set shipparts to boardcells

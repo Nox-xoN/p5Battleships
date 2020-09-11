@@ -1,4 +1,4 @@
-class Shippart {
+class ShipPart {
     constructor(ship, relPos) {
         this.destroyed = false;
         this.ship = ship;

@@ -1,5 +1,5 @@
 class Boardcell {
-    constructor(x, y, xReal, yReal, w, h, brightness = 255) {
+    constructor(x, y, xReal, yReal, w, h, brightness, board) {
         this.x = x;
         this.y = y;
         this.xReal = xReal;
@@ -7,10 +7,10 @@ class Boardcell {
         this.w = w;
         this.h = h;
         this.brightness = brightness;
-        this.occupied = false;
-        this.shippart;
+        this.shipPart = undefined;
         this.centerX = this.xReal + (this.w / 2);
         this.centerY = this.yReal + (this.h / 2);
+        this.board = board;
     }
 
     mHovers() {

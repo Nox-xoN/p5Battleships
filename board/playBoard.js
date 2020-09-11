@@ -6,6 +6,7 @@ class PlayBoard {
         this.shipyard = new Shipyard(50, 600, 50, 6);
         this.dragging = false;
         this.selectedShip;
+        this.selectedCell;
     }
 
     draw() {
@@ -13,39 +14,38 @@ class PlayBoard {
         this.enemyBoard.draw();
         this.shipyard.draw();
 
-        if(this.dragging)
-        {
+        if (this.dragging) {
             this.selectedShip.drawWhileDragging();
         }
     }
 
-    placeOnPlayerBoard(pos) {
+    placeOnBoard(fromBoard, toBoard, pos) {
         if (this.selectedShip != undefined) {
-            this.shipyard.removeShip(this.selectedShip, pos)
+            fromBoard.removeShip(this.selectedShip, pos)
 
             let oldPos = this.selectedShip.pos;
-            if (!this.playerBoard.addShip(this.selectedShip, pos)) {
-                this.shipyard.addShip(this.selectedShip, oldPos);
+            if (!toBoard.addShip(this.selectedShip, pos)) {
+                fromBoard.addShip(this.selectedShip, oldPos);
             }
         }
     }
 
-    getCellFromCoords(x, y) {
+    getCellFromCoords(pos) {
 
-        if (this.playerBoard.posInBoard(x, y)) {
+        if (this.playerBoard.posInBoard(pos.x, pos.y)) {
 
-            var pos = this.playerBoard.getRelCoords(x, y);
-            return this.playerBoard.boardcells.get(pos.x + "," + pos.y);
+            let boardPos = this.playerBoard.getRelCoords(pos.x, pos.y);
+            return this.playerBoard.boardcells.get(boardPos.x + "," + boardPos.y);
 
-        } else if (this.enemyBoard.posInBoard(x, y)) {
+        } else if (this.enemyBoard.posInBoard(pos.x, pos.y)) {
 
-            var pos = this.enemyBoard.getRelCoords(x, y);
-            return this.enemyBoard.boardcells.get(pos.x + "," + pos.y);
+            let boardPos = this.enemyBoard.getRelCoords(pos.x, pos.y);
+            return this.enemyBoard.boardcells.get(boardPos.x + "," + boardPos.y);
 
-        } else if (this.shipyard.posInBoard(x, y)) {
+        } else if (this.shipyard.posInBoard(pos.x, pos.y)) {
 
-            var pos = this.shipyard.getRelCoords(x, y);
-            return this.shipyard.boardcells.get(pos.x + "," + pos.y);
+            let boardPos = this.shipyard.getRelCoords(pos.x, pos.y);
+            return this.shipyard.boardcells.get(boardPos.x + "," + boardPos.y);
 
         } else
             return false;
