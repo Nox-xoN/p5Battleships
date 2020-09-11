@@ -1,16 +1,22 @@
 class Shippart {
-    constructor(ship, pos) {
+    constructor(ship, relPos) {
         this.destroyed = false;
         this.ship = ship;
-        this.pos = pos;
+        this.relPos = relPos;
     }
 
     destroy() {
         this.destroyed = true;
     }
 
-    draw() {
+    draw(board) {
         fill(0, 255, 255);
-        rect(this.ship.x + (this.relX * 50), this.ship.y + (this.relY * 50), 50, 50);
+        rect(board.pos.x + ((this.ship.pos.x + this.relPos.x) * board.cellSize),
+            board.pos.y + ((this.ship.pos.y + this.relPos.y) * board.cellSize),
+            board.cellSize, board.cellSize);
+    }
+
+    get pos() {
+        return this.ship.pos + this.relPos;
     }
 }

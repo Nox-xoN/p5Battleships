@@ -8,11 +8,18 @@ class PlayBoard {
         this.selectedShip;
     }
 
-
     draw() {
         this.playerBoard.draw();
         this.enemyBoard.draw();
         this.shipyard.draw();
+    }
+
+    placeOnPlayerBoard(pos) {
+        if (this.selectedShip != undefined) {
+            if (this.addShip(this.selectedShip, pos)) {
+                this.shipyard.removeShip(this.selectedShip);
+            }
+        }
     }
 
     getCellFromCoords(x, y) {

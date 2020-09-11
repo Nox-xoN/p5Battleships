@@ -19,11 +19,12 @@ function draw() {
 function mouseClicked(event) {
 
   var cell = battle.playBoard.getCellFromCoords(mouseX, mouseY);
-  print (cell);
+  print(cell);
   if (cell != null && cell.occupied) {
     battle.playBoard.selectedShip = cell.shippart.ship;
   }
 
+  print(battle.playBoard.playerBoard.boardWidth);
 
 }
 

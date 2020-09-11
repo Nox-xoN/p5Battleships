@@ -8,7 +8,6 @@ class Shipyard extends Board {
     }
 
     loadShips() {
-
         this.ships = [
             this.carrier = new Carrier(new Pos(0,0)),
             this.cruiser = new Cruiser(new Pos(1,0)),
