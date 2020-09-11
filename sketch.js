@@ -2,7 +2,6 @@ function setup() {
   createCanvas(displayWidth - 50, displayHeight - 200);
 
   battle = new Battle();
-  battle.playBoard.selectedShip = battle.playBoard.shipyard.ships[1];
 
 }
 
@@ -18,28 +17,28 @@ function draw() {
 
 function mouseClicked(event) {
 
-  var cell = battle.playBoard.getCellFromCoords(mouseX, mouseY);
-  print(cell);
-  if (cell != null && cell.occupied) {
-    battle.playBoard.selectedShip = cell.shippart.ship;
+}
+
+function mousePressed(event) {
+  let cell = battle.playBoard.getCellFromCoords(mouseX, mouseY);
+
+  if (cell != null && cell.shipPart != undefined) {
+    battle.playBoard.selectedShip = cell.shipPart.ship;
+    battle.playBoard.dragging = true;
+    print(battle.playBoard.selectedShip);
   }
-
-  print(battle.playBoard.playerBoard.boardWidth);
-
 }
 
-function mousePressed(event)
-{
-  
+function mouseReleased(event) {
+  let cell = battle.playBoard.getCellFromCoords(mouseX, mouseY);
+
+  if (battle.playBoard.selectedShip != undefined) {
+    battle.playBoard.placeOnPlayerBoard(new Pos(cell.x, cell.y));
+  }
+  battle.playBoard.dragging = false;
 }
 
-function mouseReleased(event)
-{
-  
-}
-
-function mouseDragged(event)
-{
+function mouseDragged(event) {
   
 }
 

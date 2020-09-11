@@ -4,7 +4,7 @@ class PlayBoard {
         this.playerBoard = new PlayerBoard();
         this.enemyBoard = new EnemyBoard(600, 50);
         this.shipyard = new Shipyard(50, 600, 50, 6);
-
+        this.dragging = false;
         this.selectedShip;
     }
 
@@ -12,15 +12,14 @@ class PlayBoard {
         this.playerBoard.draw();
         this.enemyBoard.draw();
         this.shipyard.draw();
+
+        if(this.dragging)
+        {
+            this.selectedShip.drawWhileDragging();
+        }
     }
 
     placeOnPlayerBoard(pos) {
-        // if (this.selectedShip != undefined) {
-        //     if (this.playerBoard.addShip(this.selectedShip, pos)) {
-        //         this.shipyard.removeShip(this.selectedShip, pos);
-        //     }
-        // }
-
         if (this.selectedShip != undefined) {
             this.shipyard.removeShip(this.selectedShip, pos)
 

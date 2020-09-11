@@ -10,7 +10,6 @@ class Ship {
         this.pos = pos;
         this.rotation = 0;
 
-
         this.shipParts = [];
         this.createBodyparts();
     }
@@ -24,6 +23,18 @@ class Ship {
 
         push();
         translate(board.pos.x + (this.pos.x * board.cellSize), board.pos.y + (this.pos.y * board.cellSize));
+        ellipseMode(CORNER);
+        angleMode(DEGREES);
+        rotate(this.rotation);
+        fill(255, 0, 0);
+        ellipse(0, 0, 30, 45 * this.size);
+        pop();
+    }
+
+    drawWhileDragging()
+    {
+        push();
+        translate(mouseX, mouseY);
         ellipseMode(CORNER);
         angleMode(DEGREES);
         rotate(this.rotation);

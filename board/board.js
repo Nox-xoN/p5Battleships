@@ -68,7 +68,6 @@ class Board {
         for (let shipPart of ship.shipParts) {
 
             //check if pos of every shippart is located in the board
-            print(pos.x + " " + pos.y);
             if (!(
                     pos.x + shipPart.relPos.x <= this.cellAmount &&
                     pos.y + shipPart.relPos.y <= this.cellAmount &&
