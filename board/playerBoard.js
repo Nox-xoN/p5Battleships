@@ -4,6 +4,4 @@ class PlayerBoard extends Board {
         super();
         this.build();
     }
-
-    
 }

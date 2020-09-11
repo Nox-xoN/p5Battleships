@@ -2,7 +2,7 @@ function setup() {
   createCanvas(displayWidth - 50, displayHeight - 200);
 
   battle = new Battle();
-  battle.playBoard.selectedShip = new Cruiser();
+  battle.playBoard.selectedShip = battle.playBoard.shipyard.ships[1];
 
 }
 
@@ -26,6 +26,21 @@ function mouseClicked(event) {
 
   print(battle.playBoard.playerBoard.boardWidth);
 
+}
+
+function mousePressed(event)
+{
+  
+}
+
+function mouseReleased(event)
+{
+  
+}
+
+function mouseDragged(event)
+{
+  
 }
 
 function mouseWheel(event) {

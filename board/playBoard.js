@@ -15,9 +15,18 @@ class PlayBoard {
     }
 
     placeOnPlayerBoard(pos) {
+        // if (this.selectedShip != undefined) {
+        //     if (this.playerBoard.addShip(this.selectedShip, pos)) {
+        //         this.shipyard.removeShip(this.selectedShip, pos);
+        //     }
+        // }
+
         if (this.selectedShip != undefined) {
-            if (this.addShip(this.selectedShip, pos)) {
-                this.shipyard.removeShip(this.selectedShip);
+            this.shipyard.removeShip(this.selectedShip, pos)
+
+            let oldPos = this.selectedShip.pos;
+            if (!this.playerBoard.addShip(this.selectedShip, pos)) {
+                this.shipyard.addShip(this.selectedShip, oldPos);
             }
         }
     }

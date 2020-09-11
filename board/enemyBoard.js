@@ -4,7 +4,4 @@ class EnemyBoard extends Board {
         super(boardXOffset, boardYOffset);
         this.build();
     }
-
-    
-
 }

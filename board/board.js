@@ -12,8 +12,6 @@ class Board {
 
         this.boardcells = new Map();
         this.ships = [];
-
-        // this.boardcells = new Map([...this.playerBoard.boardcells, ...this.enemyBoard.boardcells, ...this.shipyard.boardcells]);
     }
 
     build() {
@@ -30,9 +28,9 @@ class Board {
             element.draw();
         }
 
-        for (var i = 0; i < this.ships.length; i++) {
-            this.ships[i].draw(this);
-        }
+        this.ships.forEach(ship => {
+            ship.draw(this);
+        });
     }
 
     posInBoard(x, y) {
@@ -52,21 +50,42 @@ class Board {
     addShip(ship, pos) {
         if (this.tryPlaceShip(ship, pos)) {
             this.ships.push(ship);
-        }
+            return true;
+        } else
+            return false;
     }
 
     removeShip(ship) {
-        this.ships.pop(ship);
+        //unset shipparts from boardcells (old position)
+        ship.shipParts.forEach(shipPart => {
+            this.boardcells.get((shipPart.pos.x) + "," + shipPart.pos.y).shipPart = shipPart;
+        });
+
+        this.ships = this.ships.filter(e => e.name !== ship.name);
     }
 
     tryPlaceShip(ship, pos) {
-        ship.shipParts.forEach(shipPart => {
+        for (let shipPart of ship.shipParts) {
+
             //check if pos of every shippart is located in the board
-            if (!(shipPart.pos.x <= this.cellAmount && shipPart.pos.y <= this.cellAmount && shipPart.pos.x >= 0 && shipPart.pos.y >= 0)) {
+            print(pos.x + " " + pos.y);
+            if (!(
+                    pos.x + shipPart.relPos.x <= this.cellAmount &&
+                    pos.y + shipPart.relPos.y <= this.cellAmount &&
+                    pos.x + shipPart.relPos.x >= 0 &&
+                    pos.y + shipPart.relPos.y >= 0
+                )) {
                 return false;
             }
-        });
+        }
+
         ship.pos = pos;
+
+        //set shipparts to boardcells
+        ship.shipParts.forEach(shipPart => {
+            this.boardcells.get(shipPart.pos.x + "," + shipPart.pos.y).shipPart = shipPart;
+        });
+
         return true;
     }
 }

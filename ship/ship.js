@@ -46,12 +46,12 @@ class Ship {
         if (this.rotation == 0) {
             this.rotation = -90;
             for (var i = 0; i < this.size; i++) {
-                this.shipParts[i].relPos = new pos(i, 0);
+                this.shipParts[i].relPos = new Pos(i, 0);
             }
         } else {
             this.rotation = 0;
             for (var i = 0; i < this.size; i++) {
-                this.shipParts[i].relPos = new pos(0, i);
+                this.shipParts[i].relPos = new Pos(0, i);
             }
         }
     }

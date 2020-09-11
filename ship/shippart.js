@@ -17,6 +17,6 @@ class Shippart {
     }
 
     get pos() {
-        return this.ship.pos + this.relPos;
+        return new Pos(this.ship.pos.x + this.relPos.x, this.ship.pos.y + this.relPos.y);
     }
 }
