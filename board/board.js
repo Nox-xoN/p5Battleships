@@ -64,7 +64,6 @@ class Board {
         ship.shipParts.forEach(shipPart => {
             this.boardcells.get(shipPart.pos.x + "," + shipPart.pos.y).shipPart = undefined;
         });
-
         this.ships = this.ships.filter(e => e.name !== ship.name);
     }
 
@@ -82,11 +81,9 @@ class Board {
 
             //check if ship is not colliding with a already placed ship
             if (this.boardcells.get((pos.x + shipPart.relPos.x) + "," + (pos.y + shipPart.relPos.y)).shipPart != undefined) {
-                print("collision");
                 return false;
             }
         }
-        print("afterCol");
         ship.pos = pos;
 
         //set shipparts to boardcells
@@ -96,4 +93,7 @@ class Board {
 
         return true;
     }
+
+
+    
 }

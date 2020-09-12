@@ -2,7 +2,6 @@ function setup() {
   createCanvas(displayWidth - 50, displayHeight - 200);
 
   battle = new Battle();
-
 }
 
 function draw() {
@@ -15,17 +14,12 @@ function draw() {
   text("fCount: " + frameCount + ", fRate: " + frameRate(), 15, 40);
 }
 
-function mouseClicked(event) {
-
-}
-
 function mousePressed(event) {
   let cell = battle.playBoard.getCellFromCoords(new Pos(mouseX, mouseY));
   if (cell != null && cell.shipPart != undefined) {
     battle.playBoard.selectedShip = cell.shipPart.ship;
     battle.playBoard.selectedCell = cell;
     battle.playBoard.dragging = true;
-    print(battle.playBoard.selectedShip);
   }
 }
 
@@ -39,10 +33,6 @@ function mouseReleased(event) {
     battle.playBoard.selectedShip = undefined;
   }
   battle.playBoard.dragging = false;
-}
-
-function mouseDragged(event) {
-
 }
 
 function mouseWheel(event) {

@@ -30,6 +30,17 @@ class PlayBoard {
         }
     }
 
+    shoot(pos) {
+        let cell = this.enemyBoard.boardcells.get(pos.x + "," + pos.y);
+
+        if (cell.shipPart && !cell.shipPart.destroyed) {
+            cell.shipPart.destroyed = true;
+            cell.enemyShot = true;
+        } else {
+            cell.waterShot = true;
+        }
+    }
+
     getCellFromCoords(pos) {
 
         if (this.playerBoard.posInBoard(pos.x, pos.y)) {
