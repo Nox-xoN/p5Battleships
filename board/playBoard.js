@@ -6,6 +6,7 @@ class PlayBoard {
         this.shipyard = new Shipyard(50, 600, 50, 6);
         this.dragging = false;
         this.selectedShip;
+        this.draggedShip;
         this.selectedCell;
     }
 
@@ -15,7 +16,7 @@ class PlayBoard {
         this.shipyard.draw();
 
         if (this.dragging) {
-            this.selectedShip.drawWhileDragging();
+            this.draggedShip.drawWhileDragging();
         }
     }
 
@@ -24,7 +25,7 @@ class PlayBoard {
             fromBoard.removeShip(this.selectedShip, pos)
 
             let oldPos = this.selectedShip.pos;
-            if (!toBoard.addShip(this.selectedShip, pos)) {
+            if (!toBoard.addShip(this.draggedShip, pos)) {
                 fromBoard.addShip(this.selectedShip, oldPos);
             }
         }

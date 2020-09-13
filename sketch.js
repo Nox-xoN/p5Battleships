@@ -18,6 +18,7 @@ function mousePressed(event) {
   let cell = battle.playBoard.getCellFromCoords(new Pos(mouseX, mouseY));
   if (cell != null && cell.shipPart != undefined) {
     battle.playBoard.selectedShip = cell.shipPart.ship;
+    battle.playBoard.draggedShip = _.cloneDeep(cell.shipPart.ship);
     battle.playBoard.selectedCell = cell;
     battle.playBoard.dragging = true;
   }
@@ -25,18 +26,19 @@ function mousePressed(event) {
 
 function mouseReleased(event) {
   let newCell = battle.playBoard.getCellFromCoords(new Pos(mouseX, mouseY));
-  if (battle.playBoard.selectedShip != undefined) {
+  if (battle.playBoard.draggedShip != undefined) {
     let oldCell = battle.playBoard.selectedCell;
     battle.playBoard.placeOnBoard(oldCell.board, newCell.board, new Pos(newCell.x, newCell.y));
 
     battle.playBoard.selectedCell = undefined;
+    battle.playBoard.draggedShip = undefined;
     battle.playBoard.selectedShip = undefined;
   }
   battle.playBoard.dragging = false;
 }
 
 function mouseWheel(event) {
-  if (battle.playBoard.selectedShip != null) {
-    battle.playBoard.selectedShip.rotate();
+  if (battle.playBoard.draggedShip != null) {
+    battle.playBoard.draggedShip.rotate();
   }
 }
