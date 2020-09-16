@@ -7,11 +7,16 @@ class ShipPart {
 
     destroy() {
         this.destroyed = true;
+
+        let remainingParts = this.ship.shipParts.filter(shipPart => {
+            return shipPart.destroyed === false;
+        })
+
+        if (remainingParts <= 0)
+            this.ship.destroyed = true;
     }
 
     draw(board) {
-
-
         if (this.destroyed) {
             fill(255, 0, 0);
         } else {

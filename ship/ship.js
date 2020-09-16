@@ -5,6 +5,7 @@ class Ship {
         this.pos = pos;
         this.rotation = 0;
         this.bodySize = 50;
+        this.destroyed = false;
         this.shipParts = [];
         this.createBodyparts();
     }

@@ -2,6 +2,7 @@ function setup() {
   createCanvas(displayWidth - 50, displayHeight - 200);
 
   battle = new Battle();
+  battle.startSinglePlayer();
 }
 
 function draw() {
@@ -28,7 +29,7 @@ function mouseReleased(event) {
   let newCell = battle.playBoard.getCellFromCoords(new Pos(mouseX, mouseY));
   if (battle.playBoard.draggedShip != undefined) {
     let oldCell = battle.playBoard.selectedCell;
-    battle.playBoard.placeOnBoard(oldCell.board, newCell.board, new Pos(newCell.x, newCell.y));
+    oldCell.board.moveShipTo(battle.playBoard.draggedShip, newCell);
 
     battle.playBoard.selectedCell = undefined;
     battle.playBoard.draggedShip = undefined;

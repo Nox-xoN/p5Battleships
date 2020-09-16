@@ -51,8 +51,8 @@ class Board {
         return new Pos(cX, cY);
     }
 
-    addShip(ship, pos) {
-        if (this.tryPlaceShip(ship, pos)) {
+    addShip(ship, cell) {
+        if (this.tryPlaceShip(ship, cell)) {
             this.ships.push(ship);
             return true;
         } else
@@ -62,12 +62,14 @@ class Board {
     removeShip(ship) {
         //unset shipparts from boardcells (old position)
         ship.shipParts.forEach(shipPart => {
-            this.boardcells.get(shipPart.pos.x + "," + shipPart.pos.y).shipPart = undefined;
+            this.boardcells.get(shipPart.pos.xy).shipPart = undefined;
         });
         this.ships = this.ships.filter(e => e.name !== ship.name);
     }
 
-    tryPlaceShip(ship, pos) {
+    tryPlaceShip(ship, cell) {
+        let pos = cell.pos;
+
         for (let shipPart of ship.shipParts) {
             //check if pos of every shippart is located in the board
             if (!(
@@ -80,7 +82,7 @@ class Board {
             }
 
             //check if ship is not colliding with a already placed ship
-            if (this.boardcells.get((pos.x + shipPart.relPos.x) + "," + (pos.y + shipPart.relPos.y)).shipPart != undefined) {
+            if (this.boardcells.get(new Pos(pos.x + shipPart.relPos.x, pos.y + shipPart.relPos.y).xy).shipPart != undefined) {
                 return false;
             }
         }
@@ -88,12 +90,27 @@ class Board {
 
         //set shipparts to boardcells
         ship.shipParts.forEach(shipPart => {
-            this.boardcells.get(shipPart.pos.x + "," + shipPart.pos.y).shipPart = shipPart;
+            this.boardcells.get(shipPart.pos.xy).shipPart = shipPart;
         });
 
         return true;
     }
 
+    moveShipTo(ship, newCell) {
+        if (newCell.board instanceof EnemyBoard)
+            return false;
 
-    
+        if (ship != undefined) {
+            let oldCell = this.boardcells.get(ship.pos.xy);
+            let oldShip = oldCell.shipPart.ship;
+
+            this.removeShip(oldShip);
+            if (!newCell.board.addShip(ship, newCell)) {
+                this.addShip(oldShip, oldCell);
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }
