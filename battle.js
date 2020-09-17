@@ -34,8 +34,10 @@ class Battle {
     }
 
     gameLoop() {
-        this.nextStep();
-        setTimeout(this.gameLoop.bind(this), 100);
+        if (!this.gameFinished) {
+            this.nextStep();
+            setTimeout(this.gameLoop.bind(this), 100);
+        }
     }
 
     nextStep() {
@@ -44,14 +46,18 @@ class Battle {
         print(this.currentPlayer.name + " has to select a cell on which he wants to shoot");
         print("---------------------------------------------------");
 
-        let posToShoot = this.currentPlayer.shoot();
+        let posToShoot = this.currentPlayer.getShootingPos();
 
         let lastPlayer = this.currentPlayer;
         this.switchPlayer();
 
-        this.currentPlayer.playerBoard.shoot(posToShoot);
         print(lastPlayer.name + " is shooting at position " + posToShoot.xy);
         print("===================================================");
+        if (this.currentPlayer.playerBoard.shoot(posToShoot)) {
+            lastPlayer.enemyBoard.markShipPart(posToShoot);
+        } else {
+            lastPlayer.enemyBoard.markWater(posToShoot);
+        }
 
         if (this.checkIfPlayerDefeated(this.currentPlayer)) {
             this.endGame(lastPlayer);

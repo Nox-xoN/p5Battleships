@@ -38,7 +38,7 @@ class Boardcell {
 
         textSize(10);
         fill(0);
-        text(this.posReal.x + "," + this.posReal.y, this.posReal.x + 2, this.posReal.y + 11);
-        text(this.brightness, this.posReal.x + 2, this.posReal.y + 47);
+        //text(this.posReal.x + "," + this.posReal.y, this.posReal.x + 2, this.posReal.y + 11);
+        //text(this.brightness, this.posReal.x + 2, this.posReal.y + 47);
     }
 }

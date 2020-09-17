@@ -11,8 +11,8 @@ function draw() {
 
   fill(51);
   textSize(20);
-  text("mPos: " + mouseX + "," + mouseY, 15, 20);
-  text("fCount: " + frameCount + ", fRate: " + frameRate(), 15, 40);
+  //text("mPos: " + mouseX + "," + mouseY, 15, 20);
+  text("fRate: " + frameRate(), 15, 20);
 }
 
 function mousePressed(event) {

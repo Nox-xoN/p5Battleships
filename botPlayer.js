@@ -26,7 +26,7 @@ class BotPlayer extends Player {
         });
     }
 
-    shoot() {
+    getShootingPos() {
         let availableCells = Array.from(this.enemyBoard.boardcells.values()).filter(cell => {
             return cell.shot === false;
         })
@@ -34,7 +34,6 @@ class BotPlayer extends Player {
         let selectedCell = availableCells[Math.floor(Math.random() * availableCells.length)];
         return selectedCell.pos;
     }
-
 }
 
 const difficulties = {
